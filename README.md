@@ -11,8 +11,7 @@
 4. Введите код запуска файла, например: python guess_the_number.py или python3 guess_the_number.py . Нажмите Enter.
 5. После запуска, следуйте инструкциям в терминале.
 
-
-
+## Сам код:
 import random
 
 def choose_difficulty():
