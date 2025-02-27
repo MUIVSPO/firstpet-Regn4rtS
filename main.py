@@ -1,4 +1,4 @@
-mport random
+import random
 
 def choose_difficulty():  ##Выбор уровня сложности игры.
     print("Выберите уровень сложности:")
