@@ -1,6 +1,6 @@
-import random
+mport random
 
-def choose_difficulty():
+def choose_difficulty():  ##Выбор уровня сложности игры.
     print("Выберите уровень сложности:")
     print("1. Папочка, а можно поиграть? (10 попыток)")
     print("2. Не любитель азартных игр. (7 попыток)")
@@ -17,47 +17,56 @@ def choose_difficulty():
             return 5
         else:
             print("Не верно, попробуйте снова.")
-
-def guess_the_number():
-    print("Добро пожаловать в игру 'Угадай число'!")
-
+            
+def get_boundaries(): ##Получение нижней и верхней границы диапазона от пользователя.
     while True:
         try:
             lower_bound = int(input("Введите нижнюю границу диапазона: "))
             upper_bound = int(input("Введите верхнюю границу диапазона: "))
             if lower_bound < upper_bound:
-                break
+                return lower_bound, upper_bound
             else:
                 print("Нижняя граница должна быть меньше верхней!")
         except ValueError:
             print("Пожалуйста, введите целое число.")
 
-    number_to_guess = random.randint(lower_bound, upper_bound)
-    attempts = choose_difficulty()
+def get_guess(lower_bound, upper_bound): ##Получение предположения от пользователя с проверкой диапазона.
+    while True:
+        try:
+            guess = int(input("Введите ваше предположение: "))
+            if lower_bound <= guess <= upper_bound:
+                return guess
+            else:
+                print(f"Пожалуйста, введите число в диапазоне от {lower_bound} до {upper_bound}.")
+        except ValueError:
+            print("Пожалуйста, введите целое число.")
+
+def guess_the_number(): ##Основная функция игры 'Угадай число'.
+    print("Добро пожаловать в игру 'Угадай число'!")
+
+    lower_bound, upper_bound = get_boundaries()  # Получаем границы диапазона
+
+    number_to_guess = random.randint(lower_bound, upper_bound) # Генерируем число для угадывания
+
+    attempts = choose_difficulty()     # Выбираем уровень сложности и количество попыток
     attempts_left = attempts
 
     print(f"Я загадал число от {lower_bound} до {upper_bound}. У вас {attempts} попыток, чтобы угадать его.")
 
-    while attempts_left > 0:
-        try:
-            guess = int(input("Введите ваше предположение: "))
-            if guess < lower_bound or guess > upper_bound:
-                print(f"Пожалуйста, введите число в диапазоне от {lower_bound} до {upper_bound}.")
-                continue
+    while attempts_left > 0:     # Основной игровой цикл
+        guess = get_guess(lower_bound, upper_bound)
 
-            if guess < number_to_guess:
-                print("Больше!")
-            elif guess > number_to_guess:
-                print("Меньше!")
-            else:
-                print(f"Поздравляю! Вы угадали число {number_to_guess} за {attempts - attempts_left + 1} попыток.")
-                break
+        if guess < number_to_guess:
+            print("Попробуйте число больше!")
+        elif guess > number_to_guess:
+            print("Попробуйте число меньше!")
+        else:
+            print(f"Поздравляю! Вы угадали число {number_to_guess} за {attempts - attempts_left + 1} попыток.")
+            break
 
-            attempts_left -= 1
-            if attempts_left == 0:
-                print(f"Вы исчерпали все попытки. Загаданное число было {number_to_guess}.")
-        except ValueError:
-            print("Пожалуйста, введите целое число.")
+        attempts_left -= 1
+        if attempts_left == 0:
+            print(f"Увы, вы исчерпали все попытки. Загаданное число было {number_to_guess}.")
 
 if __name__ == "__main__":
     guess_the_number()
