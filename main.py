@@ -1,6 +1,6 @@
 import random
 
-def choose_difficulty():  ##Выбор уровня сложности игры.
+def choose_difficulty():  ##Выбор уровня сложности игры
     print("Выберите уровень сложности:")
     print("1. Папочка, а можно поиграть? (10 попыток)")
     print("2. Не любитель азартных игр. (7 попыток)")
@@ -18,7 +18,7 @@ def choose_difficulty():  ##Выбор уровня сложности игры.
         else:
             print("Не верно, попробуйте снова.")
             
-def get_boundaries(): ##Получение нижней и верхней границы диапазона от пользователя.
+def get_boundaries(): ##Получение нижней и верхней границы диапазона от пользователя
     while True:
         try:
             lower_bound = int(input("Введите нижнюю границу диапазона: "))
@@ -30,7 +30,7 @@ def get_boundaries(): ##Получение нижней и верхней гра
         except ValueError:
             print("Пожалуйста, введите целое число.")
 
-def get_guess(lower_bound, upper_bound): ##Получение предположения от пользователя с проверкой диапазона.
+def get_guess(lower_bound, upper_bound): ##Получение предположения от пользователя с проверкой диапазона
     while True:
         try:
             guess = int(input("Введите ваше предположение: "))
@@ -41,7 +41,7 @@ def get_guess(lower_bound, upper_bound): ##Получение предполож
         except ValueError:
             print("Пожалуйста, введите целое число.")
 
-def guess_the_number(): ##Основная функция игры 'Угадай число'.
+def guess_the_number(): ##Основная функция игры 'Угадай число'
     print("Добро пожаловать в игру 'Угадай число'!")
 
     lower_bound, upper_bound = get_boundaries()  # Получаем границы диапазона
